@@ -14,11 +14,11 @@ namespace LogParsing
             var file = new FileInfo("../../../Files/bigLog.log");
 
             var sequential = RunParser(new SequentialLogParser(file, TryGetIdFromLine));
-            //var threads = RunParser(new ThreadLogParser(file, TryGetIdFromLine));
+            var threads = RunParser(new ThreadLogParser(file, TryGetIdFromLine));
             var parallel = RunParser(new ParallelLogParser(file, TryGetIdFromLine));
             var plinq = RunParser(new PLinqLogParser(file, TryGetIdFromLine));
             
-            //CheckAreSame(sequential, threads, nameof(sequential), nameof(threads));
+            CheckAreSame(sequential, threads, nameof(sequential), nameof(threads));
             CheckAreSame(sequential, parallel, nameof(sequential), nameof(parallel));
             CheckAreSame(sequential, plinq, nameof(sequential), nameof(plinq));
         }
